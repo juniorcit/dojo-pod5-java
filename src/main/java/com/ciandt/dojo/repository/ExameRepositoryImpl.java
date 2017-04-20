@@ -5,9 +5,11 @@ import com.ciandt.dojo.utils.CSVParserBuilder;
 import com.ciandt.dojo.utils.CsvParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class ExameRepositoryImpl implements ExameRepository {
 
     @Value("${file.name}")
