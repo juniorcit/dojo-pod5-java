@@ -22,7 +22,7 @@ public class CsvParserTest {
 
     @Before
     public void setup() {
-        parser = createCsvParser();
+        parser = new CSVParserBuilder().withFilePath("src/main/resources").withFileName("exams.csv").build();
     }
 
     @Test
@@ -46,16 +46,4 @@ public class CsvParserTest {
         Assert.assertThat(listExames, Matchers.notNullValue());
         Assert.assertThat(listExames.size(), Matchers.greaterThan(10));
     }
-
-    private CsvParser createCsvParser() {
-        final Path path = Paths.get("src/main/resources", "exams.csv");
-
-        try {
-            Reader reader = Files.newBufferedReader(path, Charset.forName("UTF-8"));
-            return new CsvParser(reader);
-        } catch (IOException ex) {
-            throw new UncheckedIOException(ex);
-        }
-    }
-
 }

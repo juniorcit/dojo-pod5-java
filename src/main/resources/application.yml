@@ -1,2 +1,5 @@
 server:
   port: 8088
+file:
+  name: "exams.csv"
+  path: "src/main/resources"
