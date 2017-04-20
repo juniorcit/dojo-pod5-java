@@ -43,6 +43,11 @@ public class CsvParserTest {
 
     }
 
+    @Test
+    public void testReadExames() {
+
+    }
+
     private CsvParser createCsvParser() {
         final Path path = Paths.get("src/main/resources", "exams.csv");
 
@@ -53,6 +58,5 @@ public class CsvParserTest {
             throw new UncheckedIOException(ex);
         }
     }
-
 
 }

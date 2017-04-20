@@ -1,14 +1,13 @@
 package com.ciandt.dojo.utils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.UncheckedIOException;
+import com.ciandt.dojo.models.Exame;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CsvParser {
+public class CsvParser implements Closeable {
 
     private final BufferedReader bufferedReader;
 
@@ -23,5 +22,25 @@ public class CsvParser {
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
+    }
+
+    public List<Exame> readExames() {
+        try {
+            bufferedReader.reset();
+            bufferedReader.readLine();
+
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] columns
+            }
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    @Override
+    public void close() throws IOException {
+        if (bufferedReader != null)
+            bufferedReader.close();
     }
 }
