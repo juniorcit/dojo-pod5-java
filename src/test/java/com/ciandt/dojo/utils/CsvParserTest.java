@@ -5,7 +5,6 @@ import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.internal.matchers.Matches;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -23,16 +22,12 @@ public class CsvParserTest {
 
     @Before
     public void setup() {
-
         parser = createCsvParser();
-
     }
 
     @Test
     public void testIfCsvIsLoaded() {
-
         Assert.assertNotNull(parser);
-
     }
 
     @Test
