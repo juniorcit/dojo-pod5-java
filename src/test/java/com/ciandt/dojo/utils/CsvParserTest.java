@@ -1,9 +1,11 @@
 package com.ciandt.dojo.utils;
 
+import com.ciandt.dojo.models.Exame;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.internal.matchers.Matches;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -45,7 +47,9 @@ public class CsvParserTest {
 
     @Test
     public void testReadExames() {
-
+        List<Exame> listExames = parser.readExames();
+        Assert.assertThat(listExames, Matchers.notNullValue());
+        Assert.assertThat(listExames.size(), Matchers.greaterThan(10));
     }
 
     private CsvParser createCsvParser() {

@@ -9,15 +9,16 @@ import java.util.List;
 
 public class CsvParser implements Closeable {
 
-    private final BufferedReader bufferedReader;
+    private final Reader reader;
 
     public CsvParser(final Reader readerFromBufer) {
-        bufferedReader = new BufferedReader(readerFromBufer);
+        reader = readerFromBufer;
     }
 
     public List<String> readHeaders() {
 
         try {
+            BufferedReader bufferedReader = getBufferedReader();
             return Arrays.asList(bufferedReader.readLine().split(","));
         } catch (IOException e) {
             throw new UncheckedIOException(e);
@@ -26,21 +27,39 @@ public class CsvParser implements Closeable {
 
     public List<Exame> readExames() {
         try {
-            bufferedReader.reset();
+            BufferedReader bufferedReader = getBufferedReader();
             bufferedReader.readLine();
 
+            List<Exame> exames = new ArrayList<Exame>();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                String[] columns
+                exames.add(getExameFromLine(line));
             }
+            return  exames;
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
     }
 
+    private Exame getExameFromLine(String line) {
+        String[] fieldValues =  line.split(",");
+
+        Double price = -1.0;
+        try {
+            price = Double.parseDouble(fieldValues[2]);
+        }catch (NumberFormatException e){
+            System.out.println("Exame com preço inválido");
+        }
+        return  new Exame(fieldValues[0], fieldValues[1], price);
+    }
+
+    private BufferedReader getBufferedReader() {
+        return new BufferedReader(reader);
+    }
+
     @Override
     public void close() throws IOException {
-        if (bufferedReader != null)
-            bufferedReader.close();
+        if (reader != null)
+            reader.close();
     }
 }

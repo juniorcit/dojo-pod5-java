@@ -6,6 +6,12 @@ public class Exame {
     private String codigo;
     private double preco;
 
+    public Exame(String nome, String codigo, double preco){
+        this.nome = nome;
+        this.codigo = codigo;
+        this.preco = preco;
+    }
+
     public String getNome() {
         return nome;
     }
